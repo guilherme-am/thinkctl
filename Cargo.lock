@@ -2600,6 +2600,7 @@ dependencies = [
  "gloo-timers",
  "include_dir",
  "pulldown-cmark",
+ "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
 ]

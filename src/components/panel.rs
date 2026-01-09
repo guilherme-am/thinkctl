@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 #[component]
 pub fn Panel(title: &'static str, children: Element) -> Element {
     rsx! {
-        div { class: "w-full max-w-4xl bg-slate-900 rounded-lg shadow-2xl border border-slate-700 overflow-hidden relative",
+        div { class: "w-full bg-slate-900 rounded-lg shadow-2xl border border-slate-700 overflow-hidden relative",
             PanelHeader { title }
             {children}
         }
