@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - run: cargo fmt --check
+    - run: cargo clippy --all-targets --all-features -- -D warnings
+    - run: cargo test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - run: rustup target add wasm32-unknown-unknown
+    - run: cargo install dioxus-cli
+    - run: dx build --release
+    - uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist/

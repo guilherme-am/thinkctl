@@ -1,0 +1,12 @@
+[package]
+name = "thinkctl"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web", "router"] }
+gloo-timers = { version = "0.3", features = ["futures"] }
+wasm-bindgen-futures = "0.4"
+include_dir = "0.7"
+web-sys = { version = "0.3", features = ["Document", "Element", "Window"] }
+pulldown-cmark = "0.12"

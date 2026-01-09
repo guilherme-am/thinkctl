@@ -1,0 +1,147 @@
+# Rust Best Practices & Conventions
+
+## Core Principles
+
+- **Ownership & Borrowing**: Leverage Rust's ownership system properly
+- **Error Handling**: Use `Result<T, E>` and `?` operator, avoid `unwrap()` in production
+- **Type Safety**: Prefer strong types over primitives (newtype pattern)
+- **Immutability**: Default to immutable, use `mut` only when necessary
+
+## Code Style
+
+### Formatting
+
+```bash
+cargo fmt --all
+```
+
+### Linting
+
+```bash
+cargo clippy --all-targets --all-features -- -D warnings
+```
+
+## Architecture
+
+- **SOLID principles**: Single responsibility, open/closed, etc.
+- **DRY**: Don't repeat yourself
+- **Composition over inheritance**: Use traits and composition
+- **Small modules**: Keep files under 300 lines when possible
+- **Clear boundaries**: Separate concerns (domain, infra, presentation)
+
+## Error Handling
+
+```rust
+// ✅ Good
+fn process_data(input: &str) -> Result<Data, ProcessError> {
+    let parsed = parse(input)?;
+    validate(&parsed)?;
+    Ok(transform(parsed))
+}
+
+// ❌ Bad
+fn process_data(input: &str) -> Data {
+    let parsed = parse(input).unwrap();
+    validate(&parsed).expect("validation failed");
+    transform(parsed)
+}
+```
+
+## Naming Conventions
+
+- **Types**: `PascalCase`
+- **Functions/variables**: `snake_case`
+- **Constants**: `SCREAMING_SNAKE_CASE`
+- **Lifetimes**: `'a`, `'b`, etc. (short, descriptive)
+
+## Module Organization
+
+```rust
+// src/lib.rs or src/main.rs
+mod components;
+mod pages;
+mod routes;
+mod utils;
+
+pub use components::*;
+pub use pages::*;
+```
+
+## Testing
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_feature() {
+        // Arrange
+        let input = setup_test_data();
+
+        // Act
+        let result = process(input);
+
+        // Assert
+        assert_eq!(result, expected);
+    }
+}
+```
+
+## Documentation
+
+- Use `///` for public API documentation
+- Use `//!` for module-level documentation
+- Include examples in doc comments
+
+```rust
+/// Processes the input data and returns a result.
+///
+/// # Examples
+///
+/// ```
+/// let result = process("input");
+/// assert!(result.is_ok());
+/// ```
+pub fn process(input: &str) -> Result<Output, Error> {
+    // implementation
+}
+```
+
+## Dependencies
+
+- Keep dependencies minimal
+- Prefer well-maintained crates
+- Pin versions in `Cargo.toml`
+- Review security advisories: `cargo audit`
+
+## Performance
+
+- Profile before optimizing
+- Use `cargo bench` for benchmarks
+- Consider `#[inline]` for hot paths
+- Avoid unnecessary allocations
+
+## Dioxus-Specific
+
+- Components should be pure functions when possible
+- Use `use_state` for local state
+- Use `use_context` for shared state
+- Keep components small and focused
+
+```rust
+#[component]
+fn MyComponent(cx: Scope, title: String) -> Element {
+    let count = use_state(cx, || 0);
+
+    render! {
+        div {
+            h1 { "{title}" }
+            button {
+                onclick: move |_| count.modify(|c| c + 1),
+                "Count: {count}"
+            }
+        }
+    }
+}
+```
