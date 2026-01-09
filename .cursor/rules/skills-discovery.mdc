@@ -1,0 +1,15 @@
+---
+name: skills-discovery
+description: Ensure the agent discovers skills under .skills/ and uses them (writer voice, markdownlint, content creator).
+globs: ["**/.skills/**/SKILL.md", "**/content/etc/thoughts/**", "**/.cursor/specs/**"]
+---
+
+# Skills discovery
+
+## Rule
+
+When working in this repo, always scan `.skills/**/SKILL.md` early and prefer following those skills over ad-hoc behavior.
+
+## Why
+
+Agent Skills provide reusable workflows and project-specific context. See: `https://agentskills.io/home`

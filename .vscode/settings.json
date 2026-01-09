@@ -1,0 +1,72 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+    "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  },
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.checkOnSave.allTargets": true,
+  "rust-analyzer.cargo.features": "all",
+  "markdownlint.config": {
+    "default": true,
+    "MD033": false,
+    "MD041": false,
+    "MD024": false,
+    "MD045": false,
+    "MD046": false,
+    "MD013": {
+      "line_length": 120,
+      "code_blocks": false,
+      "tables": false
+    }
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/target": true,
+    "**/.pmat-cache": true,
+    "**/*.wasm": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/target": true,
+    "**/.pmat-cache": true,
+    "**/Cargo.lock": true
+  },
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/target/**": true,
+    "**/.pmat-cache/**": true
+  },
+  "files.autoSave": "afterDelay",
+  "git.enabled": true,
+  "git.autoRepositoryDetection": true,
+  "scm.defaultViewMode": "tree",
+  "git.decorations.enabled": true,
+  "explorer.decorations.colors": true,
+  "explorer.decorations.badges": true,
+  "git.autoRefresh": true,
+  "git.autofetch": true,
+  "scm.diffDecorations": "all",
+  "scm.diffDecorationsGutterVisibility": "always"
+}
