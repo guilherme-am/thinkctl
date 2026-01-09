@@ -3,43 +3,61 @@ title: "whoami"
 type: conf
 ---
 
-## whoami.conf
+## whoami
 
 ```bash
 $ whoami
-guilherme-am
+guilherme
 
 $ cat /etc/passwd | grep guilherme
 guilherme:x:1000:1000:Platform Engineer:/home/guilherme:/bin/bash
 ```
 
-## Background
+Hi! I'm Guilherme.
 
-I build and operate systems that connect people, machines, and data at scale.
+I build systems that help people work together — the infrastructure kind, mostly. Platform engineering, reliability, observability. The stuff that makes other things possible.
 
-My work spans:
+## What I Do
 
-- **Telecom**: 5G/6G, edge computing, distributed cloud
-- **Automotive R&D**: Autonomous systems, real-time infrastructure
-- **SaaS Platforms**: Cloud-native applications, DevOps, SRE
-- **MLOps**: ML infrastructure, agent orchestration, observability
+I've worked across different domains:
 
-## Current Focus
+- **Telecom** — 5G/6G networks, edge computing, distributed systems
+- **Automotive R&D** — Real-time infrastructure for autonomous systems
+- **SaaS Platforms** — Cloud-native apps, DevOps, SRE practices
+- **MLOps** — ML infrastructure, agent orchestration, making AI systems observable
 
-- Platform engineering for AI systems
-- Agent-based architectures
-- Reliability at scale
-- Infrastructure as enabler, not blocker
+Right now, I'm exploring how AI agents can help us build better systems — not replace us, but work alongside us.
 
-## Philosophy
+## What I Believe
 
-Systems exist to **connect people**, not just machines.
+I think **systems exist to connect people**, not just machines.
 
-Reliability is a human concern, not only a technical one.
+Reliability isn't just about uptime — it's about trust, predictability, and keeping promises to the people who depend on your systems.
 
-Automation should reduce toil, not hide complexity.
+Automation should reduce toil, but it shouldn't hide complexity. We need to understand what we're building.
 
-## Contact
+And sustainability matters. Not just environmental (though that's important), but building systems that don't burn people out, that use resources wisely, that can be maintained long-term.
+
+## What I Love
+
+I love **open source**. The community, the collaboration, the spirit of building things together and sharing what we learn.
+
+I love **Linux and systems**. There's something beautiful about understanding how things work at a fundamental level.
+
+I love **learning from others**. Every conversation, every code review, every incident postmortem teaches me something new.
+
+## What I'm Learning
+
+I'm always learning. Right now:
+
+- How to make AI systems more reliable and observable
+- Better ways to build platform infrastructure
+- How to write about technical things in a way that's actually helpful
+- How to balance sustainability with performance
+
+I don't have all the answers. I'm figuring it out as I go, just like everyone else.
+
+## Get in Touch
 
 ```bash
 $ cat /etc/thinkctl/contact.conf
@@ -47,6 +65,8 @@ github: guilherme-am
 email: guilherme.amoreira96@gmail.com
 linkedin: /in/guilherme-amoreira
 ```
+
+If you want to chat about systems, open source, sustainability, or anything else — reach out! I'd love to hear from you.
 
 ## System Status
 
@@ -58,13 +78,12 @@ $ systemctl status guilherme.service
    Active: active (running)
    
    ├─ platform-engineering.service     active
-   ├─ reliability.service              active
-   ├─ communication.system             active
+   ├─ open-source.service              active
+   ├─ learning.service                 active
    ├─ sustainability.target            active
-   └─ ai-agents.service               activating
+   └─ ai-agents.service                activating
 ```
 
 ---
 
-This system is maintained by someone who believes infrastructure shapes the world,
-and that improving these systems makes technology more inclusive, sustainable, and resilient.
+Thanks for stopping by. Let's build something good together.
