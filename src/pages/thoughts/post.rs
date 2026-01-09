@@ -70,6 +70,9 @@ pub fn ThoughtsPath(segments: Vec<String>) -> Element {
     let tags = frontmatter
         .map(|fm| markdown::frontmatter_list(fm, "tags"))
         .unwrap_or_default();
+    let stamp = frontmatter
+        .and_then(markdown::frontmatter_timestamp)
+        .unwrap_or_else(|| "--".to_string());
     let minutes = estimate_reading_time_minutes(body);
     let rendered = markdown::render_markdown(body);
     let html = rendered.html;
@@ -137,6 +140,7 @@ pub fn ThoughtsPath(segments: Vec<String>) -> Element {
                                             if minutes > 0 {
                                                 span { class: "thoughts-pill", "{minutes} min read" }
                                             }
+                                            span { class: "thoughts-pill", "ts: {stamp}" }
                                             span { class: "thoughts-pill",
                                                 span { class: kind_color, "{kind_icon}" }
                                                 span { class: "ml-2", "{kind_label(post.kind)}" }

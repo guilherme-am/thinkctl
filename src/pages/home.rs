@@ -5,10 +5,11 @@ use crate::components::panel::Panel;
 use crate::components::section_header::SectionHeader;
 use crate::components::skills::{CertItem, SkillsGrid};
 use crate::components::terminal::Terminal;
-use crate::components::themes;
+use crate::components::terminal_ls::TerminalLsRow;
 use crate::components::themes::ThemeCard;
 use crate::content::profile;
 use crate::content_index;
+use crate::ui::terminal_ls;
 use crate::ui::theme::Theme;
 use dioxus::prelude::*;
 
@@ -251,19 +252,11 @@ pub fn Home() -> Element {
                                 span { class: "text-slate-500", "$ " }
                                 span { class: "text-green-400", "ls -la " }
                                 span { class: "text-slate-300", "/etc/thoughts/{selected_topic_label}" }
+                                span { class: "terminal-caret" }
                             }
                             div { class: "p-4 font-mono text-sm",
                                 for post in selected_posts.iter() {
-                                    a {
-                                        href: "/etc/thoughts/{post.slug}",
-                                        style: "text-decoration: none;",
-                                        class: "flex items-center justify-between py-1 border-b border-slate-800 hover:text-green-400 transition-colors",
-                                        div { class: "flex items-center gap-2",
-                                            span { class: format!("text-xs {}", themes::kind_color(post.kind)), "{themes::kind_icon(post.kind)}" }
-                                            span { class: "text-slate-300", "{post.title}" }
-                                        }
-                                        span { class: "text-slate-500", "{post.slug}" }
-                                    }
+                                    TerminalLsRow { row: terminal_ls::row_for_post(post) }
                                 }
                             }
                         }
