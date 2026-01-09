@@ -299,6 +299,79 @@ body {
     box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
 }
 
+.ls-row {
+    display: grid;
+    grid-template-columns: 11ch 3ch 10ch 10ch 9ch 12ch 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.35rem 0.25rem;
+    border-bottom: 1px solid var(--slate-800);
+    border-radius: 0.25rem;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.ls-row:hover {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.ls-row:hover .ls-name-text {
+    color: var(--green-400);
+}
+
+.ls-col {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ls-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.ls-name-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.thoughts-scrollhint-wrap {
+    margin-top: 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.thoughts-scrollhint {
+    border: 1px solid var(--slate-800);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.7rem;
+    background: rgba(15, 23, 42, 0.2);
+    text-decoration: none;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.thoughts-scrollhint:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    background: rgba(15, 23, 42, 0.35);
+}
+
+.terminal-caret {
+    display: inline-block;
+    width: 0.55rem;
+    height: 1.05rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid rgba(34, 197, 94, 0.75);
+    animation: caret-blink 1.05s step-end infinite;
+    vertical-align: -0.15rem;
+}
+
+@keyframes caret-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
 .nav-search-input {
     flex: 1;
     border: none;

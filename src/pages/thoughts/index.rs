@@ -1,8 +1,9 @@
 use crate::components::footer::Footer;
 use crate::components::navbar::Navbar;
 use crate::components::panel::Panel;
-use crate::components::themes;
+use crate::components::terminal_ls::TerminalLsRow;
 use crate::content_index;
+use crate::ui::terminal_ls;
 use crate::ui::theme::Theme;
 use dioxus::prelude::*;
 
@@ -72,24 +73,23 @@ pub fn ThoughtsIndex() -> Element {
                         }
                     }
 
-                    div { class: "mt-10 bg-slate-950 border border-slate-800 rounded-lg overflow-hidden",
+                    div { class: "thoughts-scrollhint-wrap",
+                        a { href: "#thoughts-ls", class: "thoughts-scrollhint font-mono",
+                            span { class: "text-slate-500", "↓ " }
+                            span { class: "text-slate-300", "scroll to ls -la output" }
+                        }
+                    }
+
+                    div { id: "thoughts-ls", class: "mt-10 bg-slate-950 border border-slate-800 rounded-lg overflow-hidden",
                         div { class: "bg-slate-900 border-b border-slate-800 p-4 font-mono text-sm",
                             span { class: "text-slate-500", "$ " }
                             span { class: "text-green-400", "ls -la " }
                             span { class: "text-slate-300", "/etc/thoughts" }
+                            span { class: "terminal-caret" }
                         }
                         div { class: "p-4 font-mono text-sm",
                             for post in content_index::root_posts().iter() {
-                                a {
-                                    href: "/etc/thoughts/{post.slug}",
-                                    style: "text-decoration: none;",
-                                    class: "flex items-center justify-between py-1 border-b border-slate-800 hover:text-green-400 transition-colors",
-                                    div { class: "flex items-center gap-2",
-                                        span { class: format!("text-xs {}", themes::kind_color(post.kind)), "{themes::kind_icon(post.kind)}" }
-                                        span { class: "text-slate-300", "{post.title}" }
-                                    }
-                                    span { class: "text-slate-500", "{post.slug}" }
-                                }
+                                TerminalLsRow { row: terminal_ls::row_for_post(post) }
                             }
                         }
                     }

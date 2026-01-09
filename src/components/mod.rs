@@ -5,4 +5,5 @@ pub mod panel;
 pub mod section_header;
 pub mod skills;
 pub mod terminal;
+pub mod terminal_ls;
 pub mod themes;

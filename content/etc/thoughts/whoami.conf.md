@@ -15,7 +15,8 @@ guilherme:x:1000:1000:Platform Engineer:/home/guilherme:/bin/bash
 
 Hi! I'm Guilherme.
 
-I build systems that help people work together — the infrastructure kind, mostly. Platform engineering, reliability, observability. The stuff that makes other things possible.
+I build systems that help people work together — the infrastructure kind, mostly. Platform engineering, reliability,
+observability. The stuff that makes other things possible.
 
 ## What I Do
 
@@ -32,11 +33,13 @@ Right now, I'm exploring how AI agents can help us build better systems — not 
 
 I think **systems exist to connect people**, not just machines.
 
-Reliability isn't just about uptime — it's about trust, predictability, and keeping promises to the people who depend on your systems.
+Reliability isn't just about uptime — it's about trust, predictability, and keeping promises to the people who depend
+on your systems.
 
 Automation should reduce toil, but it shouldn't hide complexity. We need to understand what we're building.
 
-And sustainability matters. Not just environmental (though that's important), but building systems that don't burn people out, that use resources wisely, that can be maintained long-term.
+And sustainability matters. Not just environmental (though that's important), but building systems that don't burn
+people out, that use resources wisely, that can be maintained long-term.
 
 ## What I Love
 

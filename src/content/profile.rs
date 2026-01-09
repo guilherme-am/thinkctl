@@ -89,8 +89,22 @@ pub const SKILLS_OBSERVABILITY: [(&str, &str, &str, Option<&str>); 9] = [
         "orange",
         Some("https://cdn.optimizely.com/img/18132920325/bb267dd0fde04a47bf59cb3989c9512b.png"),
     ),
-    ("kibana", "Kibana", "orange", None),
-    ("logstash", "Logstash", "orange", None),
+    (
+        "kibana",
+        "Kibana",
+        "orange",
+        Some(
+            "https://e7.pngegg.com/pngimages/131/974/png-clipart-kibana-elasticsearch-scalable-graphics-logo-logstash-chess24-angle-text.png",
+        ),
+    ),
+    (
+        "logstash",
+        "Logstash",
+        "orange",
+        Some(
+            "https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/4/logstash-fo8a4b773cwws2lq60rlh.png/logstash-4s2efyjt56l53mlg59jrk.png?_a=DATAg1fmZAA0",
+        ),
+    ),
     (
         "fluentd",
         "Fluentd",
@@ -115,7 +129,12 @@ pub const SKILLS_AI_MLOPS: [(&str, &str, &str, Option<&str>); 4] = [
     ("kubeflow", "Kubeflow", "orange", None),
     ("mlflow", "MLflow", "blue", None),
     ("pytorch", "PyTorch", "red", None),
-    ("huggingface", "Hugging Face", "orange", None),
+    (
+        "huggingface",
+        "Hugging Face",
+        "orange",
+        Some("https://huggingface.co/front/assets/huggingface_logo-noborder.svg"),
+    ),
 ];
 
 pub const SKILLS_LANGUAGES: [(&str, &str, &str, Option<&str>); 6] = [

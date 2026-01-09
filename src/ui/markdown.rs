@@ -84,6 +84,13 @@ pub fn frontmatter_list(frontmatter: &str, key: &str) -> Vec<String> {
         .collect()
 }
 
+pub fn frontmatter_timestamp(frontmatter: &str) -> Option<String> {
+    frontmatter_scalar(frontmatter, "updated")
+        .or_else(|| frontmatter_scalar(frontmatter, "date"))
+        .or_else(|| frontmatter_scalar(frontmatter, "created"))
+        .or_else(|| frontmatter_scalar(frontmatter, "timestamp"))
+}
+
 pub fn markdown_to_html(markdown: &str) -> String {
     use pulldown_cmark::{Options, Parser, html};
 
