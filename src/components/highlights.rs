@@ -52,12 +52,25 @@ fn parse_title_parts(input: &str) -> Vec<TitlePart> {
 }
 
 #[component]
-pub fn HighlightCard(title: &'static str, body: &'static str, icon_key: &'static str) -> Element {
-    let icon_src = format!("https://skillicons.dev/icons?i={icon_key}&theme=dark");
+pub fn HighlightCard(
+    title: &'static str,
+    body: &'static str,
+    icon_key: &'static str,
+    icon_url: Option<&'static str>,
+    featured: bool,
+) -> Element {
+    let icon_src = icon_url
+        .map(|u| u.to_string())
+        .unwrap_or_else(|| format!("https://skillicons.dev/icons?i={icon_key}&theme=dark"));
     let title_parts = parse_title_parts(title);
+    let card_class = if featured {
+        "bg-slate-950 border border-green-500/40 rounded-lg p-5 hover:border-green-500/70 transition-colors md:col-span-2"
+    } else {
+        "bg-slate-950 border border-slate-800 rounded-lg p-5 hover:border-green-500/50 transition-colors"
+    };
 
     rsx! {
-        div { class: "bg-slate-950 border border-slate-800 rounded-lg p-5 hover:border-green-500/50 transition-colors",
+        div { class: "{card_class}",
             div { class: "flex items-start gap-3",
                 img { class: "stack-icon", src: "{icon_src}", alt: "{title}" }
                 div {
@@ -78,11 +91,19 @@ pub fn HighlightCard(title: &'static str, body: &'static str, icon_key: &'static
 }
 
 #[component]
-pub fn HighlightsGrid(items: Vec<(&'static str, &'static str, &'static str)>) -> Element {
+pub fn HighlightsGrid(
+    items: Vec<(
+        &'static str,
+        &'static str,
+        &'static str,
+        Option<&'static str>,
+        bool,
+    )>,
+) -> Element {
     rsx! {
         div { class: "grid md:grid-cols-2 gap-4",
-            for (title, body, icon_key) in items {
-                HighlightCard { title, body, icon_key }
+            for (title, body, icon_key, icon_url, featured) in items {
+                HighlightCard { title, body, icon_key, icon_url, featured }
             }
         }
     }

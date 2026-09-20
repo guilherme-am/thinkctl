@@ -140,7 +140,7 @@ pub fn Terminal(on_complete: Option<EventHandler<()>>) -> Element {
                 },
                 ScriptStep {
                     kind: LineKind::Output,
-                    text: "ml: mlflow kubeflow",
+                    text: "ml: langfuse langsmith langchain pytorch",
                     pre_delay_ms: 110,
                     type_ms: 0,
                 },
@@ -158,13 +158,13 @@ pub fn Terminal(on_complete: Option<EventHandler<()>>) -> Element {
                 },
                 ScriptStep {
                     kind: LineKind::Output,
-                    text: "role: platform & devops engineer",
+                    text: "role: platform engineer, productionizing agents",
                     pre_delay_ms: 120,
                     type_ms: 0,
                 },
                 ScriptStep {
                     kind: LineKind::Output,
-                    text: "focus: systems, reliability, ai agents, tooling",
+                    text: "focus: agent runtime, evals, least privilege, observability",
                     pre_delay_ms: 120,
                     type_ms: 0,
                 },
@@ -189,6 +189,12 @@ pub fn Terminal(on_complete: Option<EventHandler<()>>) -> Element {
                 ScriptStep {
                     kind: LineKind::Output,
                     text: "platform: kubernetes (openshift, gke, eks) + helm + gitops (argo cd)",
+                    pre_delay_ms: 120,
+                    type_ms: 0,
+                },
+                ScriptStep {
+                    kind: LineKind::Output,
+                    text: "agents: deepagents google-adk jev langchain a2a claude openai",
                     pre_delay_ms: 120,
                     type_ms: 0,
                 },

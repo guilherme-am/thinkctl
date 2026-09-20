@@ -388,7 +388,7 @@ fn topic_meta(slug: &str) -> (&'static str, &'static str) {
             "blue",
         ),
         "agents" => (
-            "Autonomous agents, orchestration, and the operational reality behind AI.",
+            "Productionizing agents: definition, tools, least privilege, traces, evals, and the datasets that follow.",
             "purple",
         ),
         "mlops" => (
