@@ -45,6 +45,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Bind thinkctl.dev
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if ! gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/pages" \
+              -f build_type='workflow'
+          fi
+          gh api --method PUT "repos/${GITHUB_REPOSITORY}/pages" \
+            -f cname='thinkctl.dev' \
+            -f build_type='workflow'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
