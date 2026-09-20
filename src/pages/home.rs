@@ -106,7 +106,7 @@ pub fn Home() -> Element {
                                 HighlightsGrid {
                                     items: profile::HIGHLIGHTS
                                         .iter()
-                                        .map(|(t, b, i)| (*t, *b, *i))
+                                        .map(|(t, b, i, u, f)| (*t, *b, *i, *u, *f))
                                         .collect(),
                                 }
                             }
@@ -120,6 +120,16 @@ pub fn Home() -> Element {
                                 }
                                 div { class: "space-y-12",
                                     div {
+                                        h4 { class: "text-xs font-mono text-slate-500 uppercase tracking-wider mb-4", "Agents & evals" }
+                                        SkillsGrid {
+                                            items: profile::SKILLS_AGENTS
+                                                .iter()
+                                                .map(|(k, l, c, u)| (*k, *l, *c, *u))
+                                                .collect(),
+                                        }
+                                    }
+
+                                    div { class: "pt-2",
                                         h4 { class: "text-xs font-mono text-slate-500 uppercase tracking-wider mb-4", "Cloud & Platform" }
                                         SkillsGrid {
                                             items: profile::SKILLS_PLATFORM
@@ -160,7 +170,7 @@ pub fn Home() -> Element {
                                     }
 
                                     div { class: "pt-2",
-                                        h4 { class: "text-xs font-mono text-slate-500 uppercase tracking-wider mb-4", "AI / MLOps tooling" }
+                                        h4 { class: "text-xs font-mono text-slate-500 uppercase tracking-wider mb-4", "ML platforms" }
                                         SkillsGrid {
                                             items: profile::SKILLS_AI_MLOPS
                                                 .iter()

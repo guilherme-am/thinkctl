@@ -1,39 +1,51 @@
 pub const WHOAMI_PARAGRAPHS: [&str; 3] = [
-    "DevOps & Platform Engineer · AI/MLOps tooling enthusiast · Cloud-native · Autonomous driving · 5G/6G.",
-    "I build, break, and occasionally fix scalable systems. How? Not sure. Probably somewhere between wiring platforms, automating pipelines (and sometimes chaos), and building CLI/GUI tooling that makes developer life less boring.",
-    "Across ~6+ years I’ve worked on production Kubernetes platforms (OpenShift + managed K8s), DevX environments, and reliability/observability systems — spanning autonomous vehicle teams, telco cloud/network platforms, and an early-stage SaaS where I touched backend, frontend, infra, costs, and agentic architecture.",
+    "Platform engineer. Years of IaC and DevEx. These days most of my focus is productionizing agents: from definition to tools, least privilege, traces, evals, and the datasets that make the next loop less lucky.",
+    "I still build, break, and occasionally fix scalable systems. Kubernetes platforms, GitOps, CLIs, internal tooling. The agent work sits on that foundation instead of replacing it.",
+    "Across ~6+ years I have worked on production Kubernetes (OpenShift and managed K8s), developer platforms, and reliability/observability, spanning autonomous vehicle teams, telco cloud, and an early-stage SaaS where I touched backend, frontend, infra, costs, and agentic architecture.",
 ];
 
-pub const HIGHLIGHTS: [(&str, &str, &str); 6] = [
+pub const HIGHLIGHTS: [(&str, &str, &str, Option<&str>, bool); 6] = [
+    (
+        "Productionizing agents",
+        "This is the main work now. Agent definition (DeepAgents, Google ADK, Jev), SDK wiring (LangChain, Claude, OpenAI, A2A), least-privilege access, traces and evals (Langfuse, LangSmith), then refinement datasets so the system can get more reliable over time.",
+        "py",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/langchain.svg"),
+        true,
+    ),
     (
         "~~Automation~~ BreakingThings first",
         "I like turning messy constraints into something shippable: CLIs, GUIs, internal platforms, and automation that reduces toil.",
         "linux",
+        None,
+        false,
     ),
     (
-        "Virtualization /Containers / OCI",
-        "Containerization is my comfort zone: Docker, Podman/rootless, containerd, image pipelines, registries, and reproducible environments.",
-        "docker",
+        "IaC & DevEx",
+        "Terraform, Ansible, GitHub Actions, GitLab CI. I am still an infra-as-code person. Agent systems that cannot be provisioned, reviewed, and torn down like the rest of the platform will not last.",
+        "terraform",
+        None,
+        false,
     ),
     (
         "Kubernetes platforms",
-        "I’ve lived inside EKS, GKE, OpenShift, on-prem clusters and managed K8s: Helm charts, GitOps (Argo CD), and operating real clusters under real pressure.",
+        "I have lived inside EKS, GKE, OpenShift, on-prem clusters and managed K8s: Helm charts, GitOps (Argo CD), and operating real clusters under real pressure.",
         "kubernetes",
+        None,
+        false,
     ),
     (
         "Reliability & observability",
-        "I enjoy troubleshooting: metrics that matter, dashboards that help, and systems that are debuggable at 3 AM.",
+        "I enjoy troubleshooting: metrics that matter, dashboards that help, and systems that are debuggable at 3 AM. Agents need that stack too, not only the LLM traces.",
         "elasticsearch",
-    ),
-    (
-        "AI/MLOps tooling",
-        "I’m into MLOps pipelines and agentic tooling that automates the boring parts and makes infra smarter.",
-        "kubeflow",
+        None,
+        false,
     ),
     (
         "Writing & sharing",
-        "If I’m not building, I’m documenting: system notes, postmortems, and reusable “service units” under /etc/thoughts.",
+        "If I am not building, I am documenting: system notes, postmortems, and reusable service units under /etc/thoughts.",
         "markdown",
+        None,
+        false,
     ),
 ];
 
@@ -125,8 +137,59 @@ pub const SKILLS_OBSERVABILITY: [(&str, &str, &str, Option<&str>); 9] = [
     ),
 ];
 
+pub const SKILLS_AGENTS: [(&str, &str, &str, Option<&str>); 8] = [
+    (
+        "langchain",
+        "LangChain",
+        "green",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/langchain.svg"),
+    ),
+    (
+        "deepagents",
+        "DeepAgents",
+        "green",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/langchain.svg"),
+    ),
+    ("gcp", "Google ADK", "blue", None),
+    (
+        "a2a",
+        "A2A",
+        "blue",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/google.svg"),
+    ),
+    (
+        "anthropic",
+        "Claude SDK",
+        "orange",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/anthropic.svg"),
+    ),
+    (
+        "openai",
+        "OpenAI SDK",
+        "green",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/openai.svg"),
+    ),
+    (
+        "langfuse",
+        "Langfuse",
+        "orange",
+        Some("https://cdn.jsdelivr.net/gh/langfuse/langfuse@main/web/public/icon256.png"),
+    ),
+    (
+        "langsmith",
+        "LangSmith",
+        "orange",
+        Some("https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/langchain.svg"),
+    ),
+];
+
 pub const SKILLS_AI_MLOPS: [(&str, &str, &str, Option<&str>); 4] = [
-    ("kubeflow", "Kubeflow", "orange", None),
+    (
+        "kubeflow",
+        "Kubeflow",
+        "orange",
+        Some("https://raw.githubusercontent.com/kubeflow/website/master/static/images/logo.svg"),
+    ),
     ("mlflow", "MLflow", "blue", None),
     ("pytorch", "PyTorch", "red", None),
     (
