@@ -15,7 +15,7 @@ guilherme:x:1000:1000:Platform Engineer:/home/guilherme:/bin/bash
 
 Hi! I'm Guilherme.
 
-I build systems that help people work together, the infrastructure kind, mostly. Platform engineering, reliability,
+I build systems that help people (and machines) work together, the infrastructure kind, mostly. Platform engineering, reliability,
 observability. The stuff that makes other things possible.
 
 ## What I Do
