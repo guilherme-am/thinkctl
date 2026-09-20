@@ -48,35 +48,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Bind thinkctl.dev
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const params = {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              cname: 'thinkctl.dev',
-              build_type: 'workflow'
-            }
-            try {
-              const current = await github.rest.repos.getPages({
-                owner: context.repo.owner,
-                repo: context.repo.repo
-              }).catch((err) => {
-                core.warning(`getPages status=${err.status} ${JSON.stringify(err.response && err.response.data)}`)
-                return null
-              })
-              if (current && current.data) {
-                core.info(`pages before ${JSON.stringify(current.data)}`)
-              }
-              const res = await github.rest.repos.updateInformationAboutPagesSite(params)
-              core.info(`pages after ${JSON.stringify(res.data)}`)
-            } catch (err) {
-              const body = err.response ? JSON.stringify(err.response.data) : String(err)
-              core.error(`pages bind failed status=${err.status} ${body}`)
-              throw err
-            }
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
