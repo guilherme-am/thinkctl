@@ -63,7 +63,7 @@ pub fn ThoughtsGrep() -> Element {
                                 input {
                                     class: "thoughts-search-input font-mono",
                                     value: "{query.read()}",
-                                    placeholder: "query (slug or title)…",
+                                    placeholder: "query (slug, title, or body)…",
                                     oninput: move |e| query.set(e.value()),
                                 }
                             }
@@ -83,12 +83,17 @@ pub fn ThoughtsGrep() -> Element {
                                             a {
                                                 href: "/etc/thoughts/{post.slug}",
                                                 style: "text-decoration: none;",
-                                                class: "flex items-center justify-between py-1 border-b border-slate-800 hover:text-green-400 transition-colors",
-                                                div { class: "flex items-center gap-2",
-                                                    span { class: format!("text-xs {}", crate::components::themes::kind_color(post.kind)), "{crate::components::themes::kind_icon(post.kind)}" }
-                                                    span { class: "text-slate-300", "{post.title}" }
+                                                class: "block py-2 border-b border-slate-800 hover:text-green-400 transition-colors",
+                                                div { class: "flex items-center justify-between gap-3",
+                                                    div { class: "flex items-center gap-2 min-w-0",
+                                                        span { class: format!("text-xs {}", crate::components::themes::kind_color(post.kind)), "{crate::components::themes::kind_icon(post.kind)}" }
+                                                        span { class: "text-slate-300", "{post.title}" }
+                                                    }
+                                                    span { class: "text-slate-500 text-xs font-mono", "{post.slug}" }
                                                 }
-                                                span { class: "text-slate-500", "{post.slug}" }
+                                                if let Some(snippet) = post.snippet.as_ref() {
+                                                    span { class: "text-xs text-slate-500 block mt-1", "{snippet}" }
+                                                }
                                             }
                                         }
                                     }

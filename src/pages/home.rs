@@ -21,6 +21,7 @@ pub fn Home() -> Element {
     let theme_value = *theme.read();
     let theme_name = theme_value.name().to_string();
     let theme_class = theme_value.class();
+    let whoami = profile::whoami_paragraphs(profile::current_year());
     let selected_topic_label = selected_topic
         .read()
         .as_deref()
@@ -92,9 +93,9 @@ pub fn Home() -> Element {
                             SectionHeader { label: "whoami.conf", title: "whoami" }
                         div {
                             class: "text-slate-300 space-y-4",
-                                p { "{profile::WHOAMI_PARAGRAPHS[0]}" }
-                                p { "{profile::WHOAMI_PARAGRAPHS[1]}" }
-                                p { "{profile::WHOAMI_PARAGRAPHS[2]}" }
+                                p { "{whoami[0]}" }
+                                p { "{whoami[1]}" }
+                                p { "{whoami[2]}" }
                         }
 
                         div {
