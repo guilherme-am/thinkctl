@@ -28,3 +28,9 @@ target
 specs/
 .env
 .envrc
+
+graphify-out/cost.json
+
+graphify-out/.graphify_python
+
+graphify-out/cache/

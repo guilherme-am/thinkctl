@@ -107,7 +107,15 @@ pub fn get_post(public_slug: &str) -> Option<PostEntry> {
     posts_index().get(public_slug).cloned()
 }
 
-pub fn search(query: &str) -> Vec<PostRef> {
+#[derive(Clone)]
+pub struct SearchHit {
+    pub slug: String,
+    pub title: String,
+    pub kind: PostKind,
+    pub snippet: Option<String>,
+}
+
+pub fn search(query: &str) -> Vec<SearchHit> {
     let q = query.trim().to_ascii_lowercase();
     if q.is_empty() {
         return Vec::new();
@@ -115,18 +123,51 @@ pub fn search(query: &str) -> Vec<PostRef> {
 
     let mut out = Vec::new();
     for (slug, entry) in posts_index().iter() {
-        let hay = format!("{} {}", slug, entry.title).to_ascii_lowercase();
-        if hay.contains(&q) {
-            out.push(PostRef {
+        let slug_l = slug.to_ascii_lowercase();
+        let title_l = entry.title.to_ascii_lowercase();
+        let body_l = entry.markdown.to_ascii_lowercase();
+        let in_name = slug_l.contains(&q) || title_l.contains(&q);
+        let in_body = body_l.contains(&q);
+        if !in_name && !in_body {
+            continue;
+        }
+
+        let rank = if in_name { 0u8 } else { 1u8 };
+        out.push((
+            rank,
+            SearchHit {
                 slug: slug.clone(),
                 title: entry.title.clone(),
                 kind: entry.kind,
-            });
-        }
+                snippet: if in_body {
+                    first_matching_line(&entry.markdown, &q)
+                } else {
+                    None
+                },
+            },
+        ));
     }
 
-    out.sort_by(|a, b| a.slug.cmp(&b.slug));
-    out
+    out.sort_by(|a, b| a.0.cmp(&b.0).then_with(|| a.1.slug.cmp(&b.1.slug)));
+    out.into_iter().map(|(_, hit)| hit).collect()
+}
+
+fn first_matching_line(markdown: &str, q: &str) -> Option<String> {
+    markdown.lines().find_map(|line| {
+        if !line.to_ascii_lowercase().contains(q) {
+            return None;
+        }
+        let trimmed = line.trim();
+        if trimmed.is_empty() {
+            return None;
+        }
+        let mut snippet = trimmed.to_string();
+        if snippet.chars().count() > 96 {
+            snippet = snippet.chars().take(96).collect();
+            snippet.push('…');
+        }
+        Some(snippet)
+    })
 }
 
 fn count_files(dir: &Dir) -> usize {
@@ -400,5 +441,48 @@ fn topic_meta(slug: &str) -> (&'static str, &'static str) {
             "green",
         ),
         _ => ("A domain of thought under ThinkOS.", "green"),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn slugs(query: &str) -> Vec<String> {
+        search(query).into_iter().map(|hit| hit.slug).collect()
+    }
+
+    #[test]
+    fn search_hits_words_inside_post_body() {
+        let hits = slugs("screenshot them");
+        assert!(
+            hits.iter()
+                .any(|slug| slug.contains("productionizing-agents")),
+            "body query missed post, hits={hits:?}"
+        );
+    }
+
+    #[test]
+    fn search_unknown_token_is_empty() {
+        assert!(slugs("xyzzy-no-such-thinkctl-token").is_empty());
+    }
+
+    #[test]
+    fn search_empty_query_is_empty() {
+        assert!(slugs("   ").is_empty());
+    }
+
+    #[test]
+    fn search_body_hit_includes_matching_snippet() {
+        let hits = search("screenshot them");
+        let hit = hits
+            .iter()
+            .find(|h| h.slug.contains("productionizing-agents"))
+            .expect("missing body hit");
+        let snippet = hit.snippet.as_deref().unwrap_or("");
+        assert!(
+            snippet.to_ascii_lowercase().contains("screenshot them"),
+            "snippet={snippet:?}"
+        );
     }
 }

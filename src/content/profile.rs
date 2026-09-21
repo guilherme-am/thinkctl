@@ -1,8 +1,42 @@
-pub const WHOAMI_PARAGRAPHS: [&str; 3] = [
+pub const CAREER_START_YEAR: i32 = 2019;
+
+const WHOAMI_LEAD: [&str; 2] = [
     "Platform engineer. Years of IaC and DevEx. These days most of my focus is productionizing agents: from definition to tools, least privilege, traces, evals, and the datasets that make the next loop less lucky.",
     "I still build, break, and occasionally fix scalable systems. Kubernetes platforms, GitOps, CLIs, internal tooling. The agent work sits on that foundation instead of replacing it.",
-    "Across ~6+ years I have worked on production Kubernetes (OpenShift and managed K8s), developer platforms, and reliability/observability, spanning autonomous vehicle teams, telco cloud, and an early-stage SaaS where I touched backend, frontend, infra, costs, and agentic architecture.",
 ];
+
+const WHOAMI_CAREER_REST: &str = " I have worked on production Kubernetes (OpenShift and managed K8s), developer platforms, and reliability/observability, spanning autonomous vehicle teams, telco cloud, and an early-stage SaaS where I touched backend, frontend, infra, costs, and agentic architecture.";
+
+pub fn years_since(start_year: i32, now_year: i32) -> u32 {
+    now_year.saturating_sub(start_year).max(0) as u32
+}
+
+pub fn whoami_career_paragraph(now_year: i32) -> String {
+    let years = years_since(CAREER_START_YEAR, now_year);
+    format!("Across ~{years}+ years{WHOAMI_CAREER_REST}")
+}
+
+pub fn whoami_paragraphs(now_year: i32) -> [String; 3] {
+    [
+        WHOAMI_LEAD[0].to_string(),
+        WHOAMI_LEAD[1].to_string(),
+        whoami_career_paragraph(now_year),
+    ]
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn current_year() -> i32 {
+    js_sys::Date::new_0().get_full_year() as i32
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub fn current_year() -> i32 {
+    let secs = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0);
+    1970 + (secs / 31_557_600) as i32
+}
 
 pub const HIGHLIGHTS: [(&str, &str, &str, Option<&str>, bool); 6] = [
     (
@@ -248,3 +282,22 @@ pub const CERTS: [(&str, Option<&str>); 7] = [
         None,
     ),
 ];
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn years_since_2019_is_today_minus_start() {
+        assert_eq!(years_since(2019, 2026), 7);
+    }
+
+    #[test]
+    fn career_paragraph_uses_computed_years() {
+        let paragraph = whoami_career_paragraph(2026);
+        assert!(
+            paragraph.starts_with("Across ~7+ years "),
+            "paragraph={paragraph}"
+        );
+    }
+}
